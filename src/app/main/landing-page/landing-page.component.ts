@@ -2,8 +2,7 @@ import { animate, state, style, stagger, keyframes, transition, trigger, query }
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { CommonService } from 'src/app/services/common.service';
-import { WebSocketService } from 'src/app/services/web-socket.service';
+
 const style1 = style({
   opacity: 1,
   transform: "translateY(0)"

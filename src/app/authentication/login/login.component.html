@@ -28,7 +28,7 @@
                   </label>
                   <div
                     *ngIf="signInForm?.controls['email']?.hasError('required') && signInForm?.controls['email']?.touched"
-                    class="text-danger" style="color: rgb(247, 14, 14);">
+                    class="text-danger" style="color: rgb(0, 0, 0);">
                     Email is required.
                   </div>
                 </div>
@@ -58,31 +58,24 @@
                   </label>
                   <div
                     *ngIf="signInForm?.controls['password']?.hasError('required') && signInForm?.controls['password']?.touched"
-                    class="text-danger" style="color: rgb(247, 14, 14);">
+                    class="text-danger" style="color: rgb(0, 0, 0);">
                     Password is required.
                   </div>
                 </div>
-                <div *ngIf="errorMessage" class="text-danger" style="color: rgb(247, 14, 14);">
+                <div *ngIf="errorMessage" class="text-danger" style="color: rgb(0, 0, 0);">
                   {{ errorMessage }}
                 </div>
                 <div class="d-grid mt-4" style="padding-left: 8rem">
-                  <button type="submit" class="button btn-redColor"
+                  <button type="submit" class="button"
                     [disabled]="signInForm.invalid || isSubmitting">Login</button>
                 </div>
                 <br>
-                <div class="d-flex mt-1 justify-content-between">
-                  <h5 class="text-secondary">
-                    <a [routerLink]="['/auth/forgetPassword']">Forgot Password?</a>
-                  </h5>
-                </div>
                 <br>
                 <div class="register">
                   <h5 class="d-flex"></h5>
                 </div>
               </div>
             </div>
-            <p class="text-center" style="color:#FFFFFF; font-size: 17px;">&#64; 2024 solize india technologies, pvt
-              Ltd. All Rights Reserved</p>
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@
 }
 
 .background-img {
-  background-image: url('https://solizecorporateweb.s3.amazonaws.com/client/asset/images/loginPageDesign.png');
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -11,6 +10,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  background-color: #454f4e;
 }
 
 .inputField2 {
@@ -79,8 +79,7 @@
   align-items: center;
   padding: 10px 15px;
   gap: 15px;
-  background-color: #DE2736;
-  outline: 3px #DE2736 solid;
+  background-color: #18080a;
   outline-offset: -3px;
   border-radius: 22px;
   border: none;
@@ -102,7 +101,7 @@
 }
 
 .button:hover {
-  background-color: #e12525c6;
+  background-color: #070000c6;
 }
 
 .frame468 {
@@ -121,7 +120,6 @@
 .log_main1 {
   width: 205px;
   height: 60px;
-  background-image: url('https://solizecorporateweb.s3.amazonaws.com/client/asset/images/solize_logo_1.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

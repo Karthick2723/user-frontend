@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AdService } from './services/ad.service';
 import { Router,NavigationEnd  } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ClearCacheService } from './services/clear-cache.service';
@@ -11,7 +10,7 @@ import { ClearCacheService } from './services/clear-cache.service';
 })
 export class AppComponent {
   
-  constructor(private adService: AdService,private router: Router,private clearCache: ClearCacheService) {}
+  constructor(private router: Router,private clearCache: ClearCacheService) {}
 
   ngOnInit() {
     this.router.events.pipe(

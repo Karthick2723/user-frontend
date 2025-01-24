@@ -8,9 +8,6 @@ const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./login/login.component')
-      },{
-        path:'forgetPassword',
-        loadComponent: () => import('./forget-passowrd/forget-passowrd.component').then(m=>m.ForgetPassowrdComponent)
       }
     ]
   }
