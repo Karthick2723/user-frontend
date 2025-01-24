@@ -1,0 +1,10 @@
+app-header {
+    z-index: 1;
+    position: relative;
+}
+
+@media (min-width: 992px) {
+    .carousel-slider-img {
+        margin-top: -62px;
+    }
+}

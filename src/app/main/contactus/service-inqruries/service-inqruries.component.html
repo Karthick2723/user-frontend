@@ -1,0 +1,207 @@
+<div class="overAll">
+  <div class="imagediv">
+    <img class="contactImage" src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/contactUsImage.png" width="100%" alt="" style=" filter: brightness(0.5);
+       height: 330px;
+    background-position: center !important;
+    background-repeat: no-repeat;
+    display: flex;
+    width: 100%;
+    object-fit: cover;
+    z-index: 0;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;">
+  </div>
+  <div class="breadcrumbs">
+    <div class="background">
+      <div class="d-flex container-fluid">
+        <p [routerLink]="['/landing'] " style="cursor: pointer;" class="m-0 breadcrumbs-text">Home &nbsp;>&nbsp;</p>
+        <p [routerLink]="['/contactus']" style="cursor: pointer;" class="m-0 breadcrumbs-text">&nbsp;Conatct us &nbsp;>&nbsp;</p>
+        <p class="m-0 breadcrumbs-text active-breadcrumbs">&nbsp;Solutions </p>
+      </div>
+    </div>
+  </div>
+  <div class="content_div">
+    <div class="container p-0">
+      <div class="content container-fluid" style="padding: 0px 70px;">
+        <h1 class="text-center mainhead" style="margin: 15px 0px">Service Solutions Document
+          Downloads/Inquiries</h1>
+        <p style="font-size: 16px;"> Please provide the following information below and click the "SUBMIT" button at the
+          bottom of the page.
+          <br> For career options, please send a mail along with your resume to recruit.sid&#64;solize.com.
+        </p>
+        <p style="font-size: 16px;"> Please enable browser cookie and JavaScript. <br>
+          If the inquiry form does not work properly, please email us the necessary information.</p>
+      </div>
+      <div class="orderList container-fluid" style="padding: 0px 70px;">
+        <ul class="overallfontsiz" style="padding-left: 50px;">
+          <li>Depending on the content of your inquiry and our workload, it may take several days to several weeks for
+            us to respond.</li>
+          <li>Please note that we may not respond to inquiries made for business purposes.</li>
+          <li>For urgent matters, please contact us by phone.</li>
+        </ul>
+      </div>
+      <div class="container-fluid secondContainer ">
+        <div class="card shadow-none card-1 align-items-center">
+          <form [formGroup]="VariousForm" (ngSubmit)="SubmitConatactForm()">
+            <div class="insideCard">
+              <div class="heading d-flex">
+                <hr class="firsthr">
+                <h2>Your Details</h2>
+                <hr class="firsthr">
+              </div>
+              <div class="inputbox">
+                <div class="row moibleFlex">
+                  <div class="col">
+                    <mat-form-field class="inputform">
+                      <mat-label>First Name</mat-label>
+                      <input formControlName="firstName" required matInput>
+                      <mat-error *ngIf="VariousForm.get('firstName')?.hasError('required')">
+                        FirstName is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="inputform">
+                      <mat-label>Last Name</mat-label>
+                      <input formControlName="lastName" matInput required>
+                      <mat-error *ngIf="VariousForm.get('lastName')?.hasError('required')">
+                        LastName is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row longInBoxRow">
+                  <div class="col">
+                    <mat-form-field class="longInBox">
+                      <mat-label>Country</mat-label>
+                      <mat-select formControlName="countryUi" [disabled]="true">
+                        <mat-option value="India">India</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="longInBox">
+                      <mat-label>State</mat-label>
+                      <mat-select [(value)]="selectedState" formControlName="state">
+                        <mat-option *ngFor="let state of indianStates" [value]="state.value">{{ state.viewValue
+                          }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="row w-100">
+                <div class="col p-0">
+                  <mat-form-field class="longInBox">
+                    <mat-label>Company or Organisation</mat-label>
+                    <input formControlName="company" matInput required>
+                    <mat-error *ngIf="VariousForm.get('company')?.hasError('required')">
+                      Company or Organisation is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row moibleFlex">
+                <div class="col">
+                  <mat-form-field class="inputform">
+                    <mat-label>Department</mat-label>
+                    <input formControlName="department" matInput>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="inputform">
+                    <mat-label>Title</mat-label>
+                    <input formControlName="title" matInput>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row w-100">
+                <div class="col p-0">
+                  <mat-form-field class="longInBox">
+                    <mat-label>Phone Number</mat-label>
+                    <input formControlName="phoneNumber" matInput required>
+                    <mat-error *ngIf="VariousForm.get('phoneNumber')?.hasError('required')">
+                      PhoneNumber is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row moibleFlex">
+                <div class="col">
+                  <mat-form-field class="inputform">
+                    <mat-label>Email Address</mat-label>
+                    <input formControlName="emailAddress" type="email" matInput required>
+                    <mat-error *ngIf="VariousForm.get('emailAddress')?.hasError('required')">
+                      Email Address is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="inputform">
+                    <mat-label>Email Address (Confirmation)</mat-label>
+                    <input formControlName="confirmEmail" type="email" matInput required>
+                    <mat-error *ngIf="VariousForm.get('confirmEmail')?.hasError('required')">
+                      Confirmation Email Address is required
+                    </mat-error>
+                    <mat-error
+                      *ngIf="VariousForm.hasError('emailMismatch') && (VariousForm.get('confirmEmail')?.dirty || VariousForm.get('confirmEmail')?.touched)">
+                      Email addresses must match
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="d-flex">
+                <!--  <hr class="secondhr"> -->
+                <h4 class="SelectInquriy">Please select your inquiry from the options below</h4>
+                <!-- <hr class="secondhr"> -->
+              </div>
+              <div class="row w-100">
+                <div class="col p-0">
+                  <mat-form-field class="longInBox">
+                    <mat-label>Solution</mat-label>
+                    <mat-select formControlName="product" required>
+                      <mat-option *ngFor="let product of productsList" [value]="product.productId">{{
+                        product.productName }}</mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="VariousForm.get('product')?.hasError('required') && (VariousForm.get('product')?.dirty || VariousForm.get('product')?.touched)">
+                      Solution is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="d-flex">
+                <hr class="thirdhr">
+                <h2>Message</h2>
+                <hr class="thirdhr">
+              </div>
+              <div class="row w-100">
+                <div class="col p-0">
+                  <mat-form-field class="longInBox" style=" height: 150px;">
+                    <mat-label>Message</mat-label>
+                    <input formControlName="message" matInput>
+                  </mat-form-field>
+                </div>
+              </div>
+              <p class="service_ptag">By checking this box, you consent to receive commercial electronic messages from
+                <span class="companyName"> SOLIZE India Technologies Private Limited</span> and its subsidiaries  such as newsletters, event invitations, promotional and
+                educational content, product,  or service updates  in accordance with our privacy policy.
+              </p>
+              <mat-checkbox  class="checkboxcontent" formControlName="terms" style="color: #7A7070 !important;"
+                (change)="onCheckboxChange($event)" matInput required>I would like to receive future communications from
+                <span class="companyName"> SOLIZE India Technologies Private Limited</span>
+                </mat-checkbox>
+              <button type="submit" [disabled]="submit || disableSubmitBtn"
+                [class.disable-btn]="submit || disableSubmitBtn" class="inquiryForm btn-redColor">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="submit"></span>
+                Submit <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/whiteArrowicon.png" width="12px" alt=""></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div>
+  <div class="row xl-left-margin">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12 p-0">
+      <div class="card backgroundcard">
+        <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/background.jpg" class="card-img"
+          alt="Background Image">
+        <div class="card-img-overlay">
+          <div class="card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row middle-card-row">
+    <div class="col-md-12">
+      <div class="card middle-card" style="z-index: 0;">
+        <div class="card-body profilecard">
+          <div class="row">
+            <div class="col-md-2 col-sm-12">
+              <div class="avatar">
+                <div class="avatar-text" >
+              <div class="drag-area" >
+                <input *ngIf="!ImageSelect"  (change)="onImageChange($event)" #fileInput type="file" class="upload_hide"
+                  id="upload_coverImg"  />
+                <label for="upload_coverImg" class="upload_label">
+                  <div class="image" >
+                    <img style="height: 100%; width: 100%;"  *ngIf="imageUrl"  class="cover-image"  src="{{imageUrl}}"
+                      alt="Selected Cover Image" />
+                      <div class="avatar-text" *ngIf="!imageUrl" style="display: flex;
+                      text-align: center;
+                      align-items: center;
+                      justify-content: center;background-color: rgba(193, 1, 16, 1);">
+                      {{ getProfileImageFileName() }}
+                    </div> 
+                    <div class="overlay" ></div>
+                  </div>
+                </label>
+              </div>
+              </div>             
+            </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-sm-12 d-flex align-items-center bordermb"
+              style="border-right: 1px solid #00000080">
+              <div class="info">
+                <button type="button" class="btn btn-sm profilebtn mb-3 mt-1">
+                  {{firstName}}
+                </button>
+                <div class="mb-2" style="font-weight: bold; color: black; font-size: 20px; padding: 10px 0px;">{{firstName}}
+                  {{lastName}} </div>
+                <div style="font-size: 15px;"><p class="mb-2">{{emailId}} | {{phoneNbr}}</p></div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 d-flex align-items-center MobAdd" style="padding-left: 39px">
+              <div class="info">
+                <div style="font-weight: bold; color: black; font-size: 20px;">{{clientName}}</div>
+                <div class="addressMob" style="font-size: 15px; padding: 20px 0px; width: 320px;">{{address}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

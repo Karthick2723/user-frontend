@@ -1,0 +1,42 @@
+.full-width-image {
+  width: 100%;
+}
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.text-container>p {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 33px;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.head_2 {
+  font-weight: 600;
+  font-size: 50px;
+  color: #FFFFFF;
+}
+
+@media (max-width:601px) {
+  .head_2 {
+    font-size: 27px;
+    margin-bottom: 0;
+  }
+
+  .para {
+    font-size: 10px !important;
+    margin-bottom: 0;
+  }
+}

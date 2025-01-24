@@ -1,0 +1,160 @@
+.full-width-image {
+  width: 100%;
+  border-radius: 0px;
+}
+
+.carousel-equal-heights {
+  .carousel-item {
+    >.row {
+      height: 100%;
+    }
+
+    .card {
+
+      &,
+      &-body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-body,
+      &-text {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.overallcard {
+  border: 2px solid #E9ECEF !important;
+  border-radius: 0px !important;
+}
+
+.card_align {
+  margin-bottom: auto;
+  border-radius: 0px;
+}
+
+.hr-line {
+  opacity: 1;
+  margin: 0rem -26px;
+  height: 4px;
+  background-color: #e30012;
+  width: 104px;
+  position: absolute;
+  top: 39px;
+  border: none;
+}
+
+.services-header {
+  font-size: 29px;
+  color: #0D0D0D;
+  font-weight: 400;
+}
+
+.intro-content {
+  font-size: 17px;
+  line-height: 36px;
+  color: #312E2E;
+}
+
+.hr-line-lob {
+  opacity: 1;
+  margin: 0 auto;
+  height: 4px;
+  background-color: #e30012;
+  width: calc(100% - 20px);
+  border: none;
+  margin-left: 1px;
+}
+
+.btn-floating {
+  color: black;
+  background-color: #F6B9B933;
+  border-radius: 10px;
+  padding: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-floating:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+}
+
+.pagination {
+  padding: 0 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+
+}
+
+.vendorImage {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  margin-right: 5px;
+}
+
+.vendorName {
+  white-space: nowrap;
+  margin-left: -15px;
+}
+
+p>a {
+  text-decoration: none;
+  color: #0D0D0D;
+}
+
+.fa-chevron-left,
+.fa-chevron-right {
+  color: #00000080;
+}
+
+.full-width-image {
+  width: 100%;
+}
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.text-container>p {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 33px;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+@media (max-width:601px) {
+  .head_2 {
+    font-size: 27px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .para {
+    font-size: 6px !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+.head_2 {
+  font-weight: 600;
+  font-size: 50px;
+  color: #FFFFFF;
+}

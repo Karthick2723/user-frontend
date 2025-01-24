@@ -1,0 +1,174 @@
+<div>
+  <app-card-details></app-card-details>
+
+  <div class="mt-4" style="padding:10px">
+    <div class="container-fluid">
+      <div class="filter-row row">
+        <div class="col-12 col-sm-2 text-center mb-2">
+          <button class="btn btn-selected btn-transparent" (click)="filterByStatus('All')"
+            [ngClass]="{'btn-selected': selectedFilter === 'All'}" (click)="setSelectedFilter('All')"
+            (click)="resetFilter()">All Orders</button>
+        </div>
+        <div class="col-12 col-sm text-center mb-2">
+          <button class="btn btn-transparent" (click)="filterByStatus('Active')"
+            [ngClass]="{'btn-selected': selectedFilter === 'Active'}" (click)="setSelectedFilter('Active')">Open({{
+            openCount }})</button>
+        </div>
+        <div class="col-12 col-sm text-center mb-2">
+          <button class="btn btn-transparent" (click)="filterByStatus('Cancelled')"
+            [ngClass]="{'btn-selected': selectedFilter === 'Cancelled'}"
+            (click)="setSelectedFilter('Cancelled')">Cancelled({{cancelledCount}})</button>
+        </div>
+        <div class="col-12 col-sm-3 text-center mb-2 position-relative">
+          <input type="text" class="form-control search-order btn-transparent" placeholder="Search here "
+            (input)="applyFilter($event)">
+          <i class="fa fa-search" style="float: right; margin: -30px 10px;"></i>
+        </div>
+        <div class="col-10 col-sm-3 mb-2 position-relative">
+          <select class="form-select btn-transparent search-order select-option" aria-label="Default select example"
+            [(ngModel)]="selectedSortOption" (change)="handleSortSelection()">
+            <option selected disabled>Choose an option </option>
+            <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
+          </select>
+          <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/equalizer.png" class="slider-icon">
+        </div>
+        <div class="col-2 col-sm-auto text-center mb-2">
+          <button mat-icon-button [matMenuTriggerFor]="menu" style="width: 38px; height: 42px; border:none"
+            class="table-config-menu">
+            <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/dropdownIcon.png" alt="">
+          </button>
+          <mat-menu #menu="matMenu">
+            <div class="table-config-menu-options">
+              <mat-checkbox *ngFor="let cd of  displayedColumns; let i = index" [(ngModel)]="cd.visible">
+                {{cd.label}}
+              </mat-checkbox>
+            </div>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding:10px; margin-top: -20px;">
+    <div class="" style="width: 100%;">
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-responsive">
+          <ng-container matColumnDef="id" sticky>
+            <th mat-header-cell *matHeaderCellDef> S.No </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <div class="row-content"> {{ i + 1 }}</div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Vendor" sticky>
+            <th mat-header-cell *matHeaderCellDef> Vendor Name </th>
+            <td mat-cell *matCellDef="let element">{{element.vendorName }}
+            </td>
+          </ng-container>
+          <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
+            <ng-container matColumnDef="action" sticky>
+              <th mat-header-cell *matHeaderCellDef class="text-center">Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button type="button" class="button"
+                  [ngClass]="{'actionbtn': element.action === 'Renew Again', 'grey-button': element.action == 'Active','cancelbtn': element.action == 'Cancelled'}">
+                  {{element.action}}
+                </button>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Product" sticky>
+              <th mat-header-cell *matHeaderCellDef> Product Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.productName}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="HSMSACCode">
+              <th mat-header-cell *matHeaderCellDef> HSMSAC Code </th>
+              <td mat-cell *matCellDef="let element">{{element.sachsncode}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Client">
+              <th mat-header-cell *matHeaderCellDef> Client </th>
+              <td mat-cell *matCellDef="let element"> {{element.clientName}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="DivisionName">
+              <th mat-header-cell *matHeaderCellDef> Division Name </th>
+              <td mat-cell *matCellDef="let element">{{element.divisionName}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="LicenseType">
+              <th mat-header-cell *matHeaderCellDef> License Type </th>
+              <td mat-cell *matCellDef="let element">{{element.licenseTypeName}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Rate">
+              <th mat-header-cell *matHeaderCellDef> Rate </th>
+              <td mat-cell *matCellDef="let element">{{element.amount}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element">{{element.quantity}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="PeriodStartDate">
+              <th mat-header-cell *matHeaderCellDef> Period StartDate </th>
+              <td mat-cell *matCellDef="let element">{{element.effectiveDate}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="PeriodEndDate">
+              <th mat-header-cell *matHeaderCellDef> Period EndDate </th>
+              <td mat-cell *matCellDef="let element">{{element.expiryDate}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="InvoiceNo">
+              <th mat-header-cell *matHeaderCellDef> Invoice No </th>
+              <td mat-cell *matCellDef="let element">{{element.invoiceNo}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="ServiceNo">
+              <th mat-header-cell *matHeaderCellDef> Service No </th>
+              <td mat-cell *matCellDef="let element">{{element.serviceNumber}}
+              </td>
+            </ng-container>
+          </cdk-virtual-scroll-viewport>
+          <ng-container matColumnDef="PurchaseOrderNo">
+            <th mat-header-cell *matHeaderCellDef> Purchase OrderNo </th>
+            <td mat-cell *matCellDef="let element">{{element.purchaseOrderId}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="PurchaseOrderDate">
+            <th mat-header-cell *matHeaderCellDef> Purchase OrderDate </th>
+            <td mat-cell *matCellDef="let element">{{element.purchaseOrderDate}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="PaymentTerms">
+            <th mat-header-cell *matHeaderCellDef> Payment Terms </th>
+            <td mat-cell *matCellDef="let element">{{element.paymentTerms}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="PaymentStatus">
+            <th mat-header-cell *matHeaderCellDef> Payment Status </th>
+            <td mat-cell *matCellDef="let element">{{element.paymentStatus}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="RegionTerritory">
+            <th mat-header-cell *matHeaderCellDef> Region Territory </th>
+            <td mat-cell *matCellDef="let element">{{element.territory}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="BillToAddress">
+            <th mat-header-cell *matHeaderCellDef> Bill ToAddress </th>
+            <td mat-cell *matCellDef="let element">{{element.billingAddress}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="SupplyToAddress">
+            <th mat-header-cell *matHeaderCellDef> Supply ToAddress </th>
+            <td mat-cell *matCellDef="let element">{{element.shippingAddress}}
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

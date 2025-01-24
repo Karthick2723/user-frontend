@@ -1,0 +1,35 @@
+<footer class="bg-dark text-white">
+  <div class="container">
+    <div class="">
+      <div class="" style="padding-bottom: 10px;">
+        <ul class="nav nav1 justify-content-between">
+          <li class="nav-item "><a style="cursor:pointer;" class="nav-link2 nav-link" routerLink="/events">Events & Seminars</a></li>
+          <li class="nav-item "><a style="cursor:pointer;" class="nav-link2 nav-link" routerLink="/post-article">Post / Article</a></li>
+  <!--         <li class="nav-item "><a style="cursor:pointer;" class="nav-link2 nav-link" routerLink="/news">News</a></li> -->
+          <li class="nav-item "><a style="cursor:pointer;" class="nav-link2 nav-link" routerLink="/who-we-are">Who We Are</a></li>
+          <li class="nav-item "><a  style="cursor:pointer;" routerLink="/contactus" class="nav-link2 nav-link">Contact Us</a></li>
+        </ul>
+      </div>
+      <div style="padding: 10px 0px 10px 0px;">
+        <ul class="nav secondNav" style="gap: 10px;">
+          <li class="nav-item "><a style="cursor:pointer;" class="nav-link1 nav-link" (click)="openAbout()">About this site <span
+                class="emptyLine">|</span></a></li>
+          <li class="nav-item "><a style="cursor:pointer;" class="nav-link1 nav-link" (click)="openPrivacy()">Privacy Policy <span
+                class="emptyLine">|</span></a></li>
+          <li class="nav-item "><a style="cursor:pointer;" class="nav-link1 nav-link" (click)="openFundamental()"> Fundamental Policy
+              for Information Security <span class="emptyLine">|</span></a></li>
+          <li class="nav-item "><a style="cursor:pointer;" (click)="openCookiesInfoPage()" class="nav-link1 nav-link"> Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div class="container">
+    <div class="rights_div">
+      <p class="Rights" style="font-size: 16x;">© 2013-2024 SOLIZE Corporation All Rights Reserved.</p>
+    </div>
+  </div>
+  <button class="scroll-to-top" (click)="scrollToTop()" *ngIf="isVisible">
+    <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/upArrowBlack.png" alt="">
+  </button>
+</footer>

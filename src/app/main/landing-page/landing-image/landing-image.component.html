@@ -1,0 +1,309 @@
+<style>
+  ::placeholder {
+    color: #ffffffd9;
+    opacity: 1;
+  }
+
+  input::placeholder {
+    color: #ffffffd9;
+  }
+
+  input.search_btn1::placeholder {
+    color: #ffffffd9;
+    padding: 7px;
+  }
+</style>
+<div class="carousel-container">
+  <div class="imagediv" *ngIf="activeBanner">
+    <img rel="preload" class=" carousel-slider-img" [ngSrc]="activeBanner?.bannerImage" height="700" width="800" />
+    <div class="container">
+      <h1 class="top-left" style="max-width: 600px;text-shadow: 2px 2px #000000;">{{ activeBanner?.bannerContent }}</h1>
+    </div>
+  </div>
+  <div class="container">
+    <form class="search_box" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+      <div class="search_box_div">
+        <div class="input-container">
+          <input type="text" placeholder="Search by keywords" (keyup)="searchTag($event)" formControlName="productTag"
+            class="search_btn1">
+        </div>
+        <div *ngIf="search ">
+          <div class="dropdown-options" *ngIf="filteredtags.length > 0">
+            <div>
+              <span class="option_item" *ngFor="let item of filteredtags.slice(0,10)"
+                (click)="clickTagSearch(item)">{{item}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="input-container">
+          <input type="text" placeholder="Search by partners" formControlName="vendor" (keyup)="searchVendor($event)"
+            class="search_btn1">
+        </div>
+        <div *ngIf="!search">
+          <div class="dropdown-options" *ngIf="filteredvendors.length > 0">
+            <div>
+              <span class="option_item" *ngFor="let item of filteredvendors.slice(0.10)"
+                (click)="clickVendorSearch(item)">{{item}}</span>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn_style"><i class="fa fa-search"></i></button>
+      </div>
+    </form>
+    <div class="OverAll-Btn">
+      <div type="button" (click)="toogleBtn()" class="btn btn-primary modal-btn"
+        [ngClass]="{'primarybtn': tooglebtnOpenClose}">
+        <div class="d-flex linklogo1" data-toggle="modal" data-target="#exampleModalCenter">
+          <p [ngClass]="{'d-none': tooglebtnOpenClose}" class="solutionLetter"
+            style="margin-left: 24px;margin-right: 15px; margin-top: 4px;font-weight: 600; text-align: center;">
+            Solution <br> Keywords
+          </p>
+          <div style="    background-color: #ffffff;
+          height: 52px;
+          width: 55px;
+          border-radius: 25px; margin-left: 0px;" [ngClass]="{'border-style':!tooglebtnOpenClose}">
+            <img *ngIf="!tooglebtnOpenClose" style="position: relative;
+      left: 2px;
+      top: 12px;
+      height: 25px;
+      width: 52px;opacity: 1;" [style.transition]="'opacity 0.3s ease-in-out'" data-toggle="modal"
+              data-target="#exampleModalCenter"
+              src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/Solution%20keyword%20icon.svg"
+              alt="">
+          </div>
+          <img *ngIf="tooglebtnOpenClose" type="button" data-toggle="modal" data-target="#exampleModalCenter"
+            style="position: absolute; left: -13px !important;top: -18px !important;opacity: 1"
+            [style.transition]="'opacity 0.3s ease-in-out'"
+            src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/cancelbtn.png" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" style="overflow-y: hidden;" id="exampleModalCenter" tabindex="-1" data-backdrop="static"
+      role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header pb-0">
+            <h1 style="font-weight: 600;">Solution Keywords</h1>
+            <div class=" arrowCol web">
+              <div [routerLink]="['/solutions']" data-dismiss="modal" aria-label="Close" style="cursor: pointer;"
+                class="card arrowCard linklogo">
+                <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/blackArrow.png" alt="">
+                <span class="tooltiptext">We All Solutions</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-body pt-0">
+            <div class="row">
+              <div id="headingOne" class="mob"
+                style="margin-bottom: 10px;display: flex; margin-bottom: 10px; justify-content: space-between;">
+                <div>
+                  <ul class="list-group mob " style="text-align: start;display: flex;flex-direction: row;">
+                    <li class=""
+                      style="padding: 10px 10px; background-color: none !important; list-style-type: none; cursor: pointer;"
+                      *ngFor="let CategoryName of CategoryName; let i = index"
+                      (click)="getCategoryId(CategoryName?.categoryId, i)"
+                      [class.catselected]="i === selectedCategoryIndex">
+                      <span>{{CategoryName.categoryName}}</span>
+                    </li>
+                    <li
+                      style="padding: 10px 10px; background-color: none !important; list-style-type: none; cursor: pointer;"
+                      [class.catselected]="selectedCategoryIndex === -1" (click)="getAllVendorList()">Partners</li>
+                  </ul>
+                </div>
+                <div class=" arrowCol">
+                  <div [routerLink]="['/solutions']" data-dismiss="modal" aria-label="Close" style="cursor: pointer;"
+                    class="card arrowCard linklogo">
+                    <img src="https://solizecorporateweb.s3.amazonaws.com/client/asset/images/blackArrow.png" alt="">
+                    <span class="tooltiptext">We All Solutions</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 text-align-start d-none d-lg-block" style="padding-right: 0px;">
+                <div class="accordion scroll-manual" id="accordionExample">
+                  <div class="card cardheight" style="margin-bottom: 0px;">
+                    <div class="card-body">
+                      <div *ngIf="categoryTagList.length > 0">
+                        <ul *ngIf="ProductsShow" class="list-group"
+                          style="text-align: start; display: flex;flex-direction: row;flex-wrap: wrap;cursor: pointer;">
+                          <li class="list-group-item productTag " style="padding: 10px 10px;"
+                            *ngFor="let data of categoryTagList; let i = index"
+                            (click)="getProductId(data?.productTagId, i)" [class.selected]="i === selectedTagIndex">
+                            <span>{{data.productTagName}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div *ngIf="vendorList.length > 0">
+                        <ul *ngIf="VendorShow" class="list-group"
+                          style="text-align: start; display: flex;flex-direction: row;flex-wrap: wrap;cursor: pointer;">
+                          <li class="list-group-item productTag" style="padding: 10px 10px;"
+                            *ngFor="let datas of vendorList; let i = index" (click)="getVendorId(datas?.vendorId, i)"
+                            [class.selected]="i === selectedVendorIndex">
+                            {{datas.vendorName}}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div *ngIf="categoryTagList.length === 0">
+                        <div *ngIf="ProductsShow" class="image2">
+                          <h2 class="text-center">No Data Found</h2>
+                        </div>
+                      </div>
+                      <div *ngIf="vendorList.length === 0">
+                        <div *ngIf="VendorShow" class="image2">
+                          <h2 class="text-center">No Data Found</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mobile View -->
+              <div class="col-12 p-0 d-lg-none" style="padding-left: 15px;">
+                <div class="row">
+                  <div class="">
+                    <ul style="padding: 0px;
+                    display: inline-flex; gap: 0px;
+                    display: inline-flex; gap: 0px;
+                    flex-wrap: wrap; margin-bottom: 5px;justify-content: center;">
+                      <li class=""
+                        style=" display: flex; justify-content: center; align-items: center; font-size: 12px; padding: 10px 10px;border-radius: 10px; width: 50%;border: 1px solid rgba(0, 0, 0, 0.2); background-color: none !important; list-style-type: none;"
+                        *ngFor="let CategoryName of CategoryName; let i = index"
+                        (click)="getCategoryId(CategoryName?.categoryId, i)"
+                        [class.catselected]="i === selectedCategoryIndex">
+                        <span>{{CategoryName.categoryName}}</span>
+                      </li>
+                      <li
+                        style="display: flex; justify-content: center; align-items: center; padding: 10px 10px; font-size: 12px;width: 50%;border-radius: 10px;border: 1px solid rgba(0, 0, 0, 0.2);  background-color: none !important; list-style-type: none;"
+                        [class.catselected]="selectedCategoryIndex === -1" (click)="getAllVendorList()">Partners</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="accordion mt-2" id="mobileAccordionExample">
+                  <div class="card" style="margin-bottom: 0px;">
+                    <div id="mobileCollapseOne" class="collapse show" aria-labelledby="mobileHeadingOne"
+                      data-parent="#mobileAccordionExample">
+                      <div class="card-body scroll-manual" style="height: 160px;">
+                        <ul *ngIf="ProductsShow" class="list-group"
+                          style="text-align: start; display: flex;flex-direction: row;flex-wrap: wrap;">
+                          <li class="list-group-item productTag " style="padding: 10px 10px;font-size: 10px;"
+                            *ngFor="let data of categoryTagList; let i = index"
+                            (click)="getProductId(data?.productTagId, i)" [class.selected]="i === selectedTagIndex">
+                            <span>{{data.productTagName}}</span>
+                          </li>
+                        </ul>
+                        <ul *ngIf="VendorShow" class="list-group"
+                          style="text-align: start; display: flex;flex-direction: row;flex-wrap: wrap;">
+                          <li class="list-group-item productTag" style="padding: 10px 10px;font-size: 10px;"
+                            *ngFor="let datas of vendorList; let i = index" (click)="getVendorId(datas?.vendorId, i)"
+                            [class.selected]="i === selectedVendorIndex">
+                            {{datas.vendorName}}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div id="mobileCollapseTwo" class="collapse" aria-labelledby="mobileHeadingTwo"
+                      data-parent="#mobileAccordionExample">
+                      <div class="card-body scroll-manual" style="height: 188px;">
+                        <ul *ngIf="VendorShow" class="list-group"
+                          style="text-align: start; display: flex;flex-direction: row;flex-wrap: wrap;">
+                          <li class="list-group-item productTag" style="padding: 10px 10px;"
+                            *ngFor="let datas of vendorList; let i = index" (click)="getVendorId(datas?.vendorId, i)"
+                            [class.selected]="i === selectedVendorIndex">
+                            {{datas.vendorName}}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5 col-12 mobilePadding">
+                <div class="row mt-lg-0 mt-sm-4">
+                  <div class="imageContent">
+                    <div class="card modalCard py-2 cardheight">
+                      <div class="container">
+                        <div class="row" *ngIf="VendorShow">
+                          <div *ngIf="spinneShow" class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                              <span class="sr-only">Loading...</span>
+                            </div>
+                          </div>
+                          <h3 class="d-flex">Solutions</h3>
+                          <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-center rounded-5 pb-2 gap-1"
+                            *ngFor="let vendorDetail of vendorDetails">
+                            <div style="position: relative;height: 150px;width: 200px;" class="image">
+                              <img class="vendorImage img-fluid" (click)="viewProudct(vendorDetail.productId)"
+                                data-dismiss="modal" aria-label="Close"
+                                style="width: -webkit-fill-available; height: 100%; border-radius: 25px; cursor: pointer;"
+                                src="{{vendorDetail.productImage}}" alt="">
+                              <div data-dismiss="modal" aria-label="Close" (click)="viewProudct(vendorDetail.productId)"
+                                class="gradient-overlay"></div>
+                              <div class="imageNames">
+                                <h2>
+                                  {{vendorDetail.productName}}
+                                </h2>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="ProductsShow">
+                          <div *ngIf="spinneShow;else productDetailsBlock" class="d-flex justify-content-center p-5">
+                            <div class="d-flex justify-content-center">
+                              <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          </div>
+                          <ng-template #productDetailsBlock>
+                            <div *ngIf="categoryTagList.length > 0">
+                                <h3 class="d-flex">Solutions</h3>
+                                <div class="col-md-6 col-sm-6 col-12 d-flex justify-content-center pb-2"
+                                  *ngFor="let ProductDetails of ProductDetails;let i=index;">
+                                  <div class="image" style="position: relative;height: 150px;width: 200px;">
+                                    <img class="productImage img-fluid" (click)="viewProudct(ProductDetails.productId)"
+                                      data-dismiss="modal" aria-label="Close"
+                                      style="width: -webkit-fill-available; height: 100%; cursor: pointer; border-radius: 25px;"
+                                      src="{{ProductDetails.productImage}}" alt="">
+                                    <div data-dismiss="modal" aria-label="Close"
+                                      (click)="viewProudct(ProductDetails.productId)" class="gradient-overlay"></div>
+                                    <div class="imageNames">
+                                      <h2>
+                                        {{ProductDetails.productName}}
+                                      </h2>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                              <div *ngIf="categoryTagList.length === 0">
+                                <div *ngIf="ProductsShow" class="image2">
+                                  <h2 class="text-center">No Data Found</h2>
+                                </div>
+                              </div>
+                              <div *ngIf="vendorList.length === 0">
+                                <div *ngIf="VendorShow" class="image2">
+                                  <h2 class="text-center">No Data Found</h2>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

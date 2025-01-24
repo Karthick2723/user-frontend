@@ -1,0 +1,25 @@
+<div class="container-fluid menu-link-border">
+  <div class="card" style="box-shadow: none; margin: 0px;">
+    <div class="row">
+      <nav class="col-md-12 col-lg-12 col-sm-12 col-xl-2 d-md-block bg-light">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item" *ngFor="let navLink of navLinks">
+              <a class="nav-link" [class.active]="selectedLink === navLink.label" (click)="selectLink(navLink.label)">
+                {{ navLink.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main role="main" class="col-lg-12 col-md-12 col-sm-12 col-xl-10 maincontainer">
+        <div *ngIf="selectedLink === 'Orders'">
+          <app-order-details></app-order-details>
+        </div>
+        <div *ngIf="selectedLink === 'My Account'">
+          <app-my-account></app-my-account>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
