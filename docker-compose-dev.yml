@@ -1,7 +1,0 @@
-version: "3.8"
-services:
-  solize-ui:
-    image: 192.168.0.74:8083/solizeui:${GIT_SHORT_COMMIT}
-    container_name: solize-ui-front
-    ports:
-      - "4206:80"
