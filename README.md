@@ -1,1 +1,1 @@
-# Solize-Web-Frontend
+# Rubix-Web-Frontend
